@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+   <meta charset="utf-8">
+   <title>Django Highcharts Example</title>
+</head>
+<body>
+   <div id="container"></div>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   
+   <!-- How to declare variables
+      <script type="text/javascript">
+         var teams = "{{ teams }}"
+      </script>
+   -->
+
+   <script type="text/javascript">
+   Highcharts.chart('container', {
+      chart: {
+         type: 'column'
+      },
+      title: {
+         text: 'Teams and Positions'
+      },
+      xAxis: {
+         categories: 
+         
+            {{ teams|safe }}
+         
+      },
+      series: 
+      [
+         {
+         name: 'Position',
+         data: [1,2,3,4,5]
+         },
+         
+         {
+         name: 'Year 1900',
+         data: [133, 156, 947, 408, 6]
+         },
+         
+         {
+            name: 'Year 2012',
+            data: [1052, 954, 4250, 740, 38]
+         }
+      ]
+   }
+);
+</script>
+</body>
+
+
+{% endblock %}

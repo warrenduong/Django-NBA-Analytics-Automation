@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+</head>
+
+
+
+
+      <img src="data:image/png;base64, {{log_transf_chart|safe}}">
+      <img src="data:image/png;base64, {{ols_chart|safe}}">
+
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+
+table {
+  table-layout:unset;
+  display: inline-block;
+  background-color: rgb(17, 138, 98);
+  border-collapse: collapse;
+  border: 1px solid black;
+  height: 800pt;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+table th:first-child{
+  border-radius:10px 0 0 10px;
+}
+
+table th:last-child{
+  border-radius:0 10px 10px 0;
+}
+
+
+th {
+  color: burlywood;
+  background-color:cadetblue;
+  border: 2px solid rgb(69, 135, 138);
+  border-collapse: collapse;
+  font-size: 8pt;
+  text-align: center;
+}
+
+td:first-child {
+  font-size: small;
+  border: 1px solid black;
+  text-align: center;
+  width: max-content;
+}
+
+
+td:nth-child(n + 2) {
+  border: 1px solid black;
+  text-align: center;
+  width: 80pt;
+  overflow: hidden;
+}
+
+
+form {
+  text-align: justify;
+  background-color: lightcyan;
+  font-size: 16pt;
+}
+
+input {
+  font-size: 10pt;
+  background-color: lightseagreen;
+}
+

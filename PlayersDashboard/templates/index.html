@@ -1,0 +1,92 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+   <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+</head>
+
+
+
+<form action="" method="get">
+   <div class="container-fluid">
+      <div class="row">
+         <div class="col">
+            {{ filter.form }}
+            <button type="submit">Search</button>
+         </div>
+      </div>
+   </div>
+</form>
+
+
+<table>
+      <tr>
+         <th>Name</th>
+         <th>Position <br> (POS) </th>
+         <th>Age</th>
+         <th>Team <br> (Tm) </th>
+         <th>Games Played <br> (GP) </th> 
+         <th>Games Started <br> (GS) </th>
+         <th>Minutes Played <br> (MP) </th>
+         <th>Field Goals <br> (FG) </th>
+         <th>Field Goals Attempt <br> (FGA) </th>
+         <th>Field Goals% <br> (FG%) </th>            <!--10-->
+         <th>3-Points <br> (3P) </th>
+         <th>3-Point Attempts <br> (3PA) </th>
+         <th>3-Point% <br> (3PA) </th>
+         <th>2-Points <br> (2P) </th>
+         <th>2-Point Attempts <br> (2PA) </th>
+         <th>2-Point% </th>
+         <th>Freethrows </th>
+         <th>Freethrow Attempt </th>
+         <th>Freethrow% </th>                         <!--20-->
+         <th>Off Rebounds </th>
+         <th>Def Rebounds </th>
+         <th>Total Rebounds </th>
+         <th>Assists </th>
+         <th>Steals </th>
+         <th>Blocks </th>
+         <th>Turn-Overs </th>
+         <th>Personal Fouls </th>
+         <th >Points </th>
+         <th>Season </th>                             <!--30-->
+      </tr>
+
+      {% for x in filter.qs %}
+      <tr>
+         <td>{{ x.player }}</td>
+         <td>{{ x.pos }}</td>
+         <td>{{ x.age }}</td>
+         <td>{{ x.tm }}</td>
+         <td>{{ x.g }}</td>
+         <td>{{ x.gs }}</td>
+         <td>{{ x.mp }}</td>
+         <td>{{ x.fg }}</td>
+         <td>{{ x.fga }}</td>
+         <td>{{ x.fg_pct }}</td>                     <!--10-->
+         <td>{{ x.three_pt }}</td>
+         <td>{{ x.three_pt_attempt }}</td>
+         <td>{{ x.three_pt_pct }}</td>
+         <td>{{ x.two_pt }}</td>
+         <td>{{ x.two_pt_attempt }}</td>
+         <td>{{ x.two_pt_pct }}</td>
+         <td>{{ x.ft }}</td>
+         <td>{{ x.fta }}</td>
+         <td>{{ x.ft_pct }}</td>
+         <td>{{ x.orb }}</td>                         <!--20-->
+         <td>{{ x.drb }}</td>
+         <td>{{ x.trb }}</td>
+         <td>{{ x.ast }}</td>
+         <td>{{ x.stl }}</td>
+         <td>{{ x.blk }}</td>
+         <td>{{ x.tov }}</td>
+         <td>{{ x.pf }}</td>
+         <td>{{ x.pts }}</td>
+         <td>{{ x.season }}</td>
+         </tr>
+      {% endfor %}
+   </table>
+
+
+{% endblock %}

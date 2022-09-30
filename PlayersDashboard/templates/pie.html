@@ -1,0 +1,127 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+  <title> NBA Positions Graph</title>
+  <style type = "text/css">
+    .chartMenu {
+      width: 100vw;
+      height: 10px;
+      background: #1A1A1A;
+      color: rgba(255, 26, 104, 1);
+    }
+    .chartCard {
+      width: 100vw;
+      height: calc(100vh - 40px);
+      background: rgba(255, 26, 104, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chart-container {
+      width: 1400px;
+      padding: 30px;
+      border-radius: 50px;
+      border: solid 5px rgba(255, 26, 104, 1);
+      background: white;
+    }
+  </style>
+</head>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+  <div class="chartCard">
+    <div class="chart-container">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+    
+    
+    <script>
+    
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const data = new Chart(ctx, {
+      type: 'bar',
+      data: {
+         labels: [{% for pos in labels %}"{{ pos }}", {% endfor %}],
+         datasets: [{
+            label: "League Wide Count for Positions Played",
+            data: [{% for pos in values %}
+               {{ pos }},
+               {% endfor %}],
+            backgroundColor: [
+                        '#C724B1', //1 purplish         (PG)
+                        '#4D4DFF', //2 bluish           (PF)
+                        '#E0E722', //3 gold-yellowish   (SF-SG)
+                        '#FFAD00', //4 yellow-orangish  (PG-SG)
+                        '#D22730', //5 light-reddish    (C-PF)
+                        '#674ea7', //6 light-purplish   (PF-C)
+                        '#44D62C', //7 neon-greenish    (SG)
+                        '#83018E', //8 royal-purple     (C)
+                        '#029782', //9 turquoise        (SG_PG)
+                        '#4c1130', //10 magenta         (SG_SF)
+                        '#2986cc', //11 light-blue      (SF)
+                        '#a64d79', //12 light-pinkish   (SF_PF)
+                        '#2e5e16', //13 dark-green      (PF-SF))
+            ],
+            borderColor: 'white',
+            borderWidth: 1
+         }]
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: 'Player Positions Count',
+          position: 'top',
+          fontStyle: 'normal',
+          fontSize: 20,
+          padding: 10,
+        },
+         scales: {
+            y: [{
+               ticks: {
+                  beginAtZero: true
+               }
+            }]
+         },
+         legend: {
+            onClick: (evt, legendItem, legend) => {
+               const index = legend.chart.data.labels.indexOf(legendItem.text);
+               legend.chart.toggleDataVisibility(index)
+               legend.chart.update();
+            },
+            display: true,
+            position: 'right',
+            labels: {
+               generateLabels: function(chart) {
+                  var labels = chart.data.labels;
+                  var dataset = chart.data.datasets[0];
+                  var legend = labels.map(function(label, index) {
+                     return {
+                        datasetIndex: 0,
+                        fillStyle: dataset.backgroundColor && dataset.backgroundColor[index],
+                        strokeStyle: dataset.borderColor && dataset.borderColor[index],
+                        hidden: false,
+                        lineWidth: dataset.borderWidth,
+                        text: label
+                     }
+                  });
+                  return legend;
+               }
+            
+            }
+         },
+      }
+   });
+
+   
+  </script>
+
+  
+  </body>
+
+{% endblock %}
